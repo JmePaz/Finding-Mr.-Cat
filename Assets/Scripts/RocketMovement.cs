@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class RocketMovement : MonoBehaviour
 {
     Rigidbody rigidBody;
     AudioSource audioSource;
 
-    [SerializeField] private float thrustSpeed = 9f;
-    [SerializeField] private float rotSpeed = 6f;
+    [SerializeField] private float thrustSpeed = 900f;
+    [SerializeField] private float rotSpeed = 40f;
 
     // Start is called before the first frame update
     void Start()
