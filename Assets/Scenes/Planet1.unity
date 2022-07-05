@@ -401,7 +401,7 @@ PrefabInstance:
     - target: {fileID: 2298308976922845837, guid: 528bca4fa52c80b4d9fa67db87d2026b,
         type: 3}
       propertyPath: m_TagString
-      value: LauchingPad
+      value: Respawn
       objectReference: {fileID: 0}
     - target: {fileID: 2298308976922845825, guid: 528bca4fa52c80b4d9fa67db87d2026b,
         type: 3}
@@ -527,21 +527,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3398758263449014262, guid: e2a69ea9d90f6114cbb33128ee6ad770,
-        type: 3}
-      propertyPath: m_Drag
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398758263449014263, guid: e2a69ea9d90f6114cbb33128ee6ad770,
-        type: 3}
-      propertyPath: thrustSpeed
-      value: 800
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398758263449014263, guid: e2a69ea9d90f6114cbb33128ee6ad770,
-        type: 3}
-      propertyPath: rotSpeed
-      value: 40
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a69ea9d90f6114cbb33128ee6ad770, type: 3}
 --- !u!1001 &4573019820188404217
@@ -628,7 +613,7 @@ PrefabInstance:
     - target: {fileID: 7993067495089909103, guid: cc5e4f380be13104db7e7423b3ddc4c5,
         type: 3}
       propertyPath: m_TagString
-      value: LandingPad
+      value: Finish
       objectReference: {fileID: 0}
     - target: {fileID: 5285106090704273010, guid: cc5e4f380be13104db7e7423b3ddc4c5,
         type: 3}
