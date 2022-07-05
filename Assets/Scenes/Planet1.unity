@@ -193,8 +193,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.7019774e-38, y: 6.7762636e-21, z: 2.3509887e-38,
-    w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 4e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -309,7 +308,7 @@ GameObject:
   - component: {fileID: 1540885937}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -398,6 +397,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaunchingPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298308976922845837, guid: 528bca4fa52c80b4d9fa67db87d2026b,
+        type: 3}
+      propertyPath: m_TagString
+      value: LauchingPad
       objectReference: {fileID: 0}
     - target: {fileID: 2298308976922845825, guid: 528bca4fa52c80b4d9fa67db87d2026b,
         type: 3}
@@ -523,31 +527,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3398758263368077144, guid: e2a69ea9d90f6114cbb33128ee6ad770,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7045825
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398758263368077144, guid: e2a69ea9d90f6114cbb33128ee6ad770,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7045825
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398758263368077144, guid: e2a69ea9d90f6114cbb33128ee6ad770,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.7045825
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398758263449014262, guid: e2a69ea9d90f6114cbb33128ee6ad770,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398758263449014262, guid: e2a69ea9d90f6114cbb33128ee6ad770,
-        type: 3}
-      propertyPath: m_Drag
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a69ea9d90f6114cbb33128ee6ad770, type: 3}
 --- !u!1001 &4573019820188404217
@@ -629,6 +608,11 @@ PrefabInstance:
     - target: {fileID: 7993067495089909103, guid: cc5e4f380be13104db7e7423b3ddc4c5,
         type: 3}
       propertyPath: m_Name
+      value: LandingPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993067495089909103, guid: cc5e4f380be13104db7e7423b3ddc4c5,
+        type: 3}
+      propertyPath: m_TagString
       value: LandingPad
       objectReference: {fileID: 0}
     - target: {fileID: 5285106090704273010, guid: cc5e4f380be13104db7e7423b3ddc4c5,

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody rigidBody;
+    AudioSource audioSource;
 
     [SerializeField] private float thrustSpeed = 9f;
     [SerializeField] private float rotSpeed = 6f;
@@ -12,8 +13,12 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //components
         rigidBody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
 
+        //set audioSource to loop
+        audioSource.loop = true;
 
     }
 
@@ -33,19 +38,36 @@ public class Movement : MonoBehaviour
         //thurst
         if(Input.GetKey(KeyCode.Space)){
             Thrust();
+            PlayAudio();
             Debug.Log("Thrusting");
+        }
+        else{
+            StopAudio();
         }
     }
 
     //rotate 
     void Rotate(Vector3 direction){
-        rigidBody.freezeRotation = true;
-        this.transform.Rotate(direction*rotSpeed*Time.deltaTime);
+        rigidBody.freezeRotation = true; // freeze all rotation
+        this.transform.Rotate(direction*rotSpeed*Time.deltaTime); //  rotate the rocket
+        // freeze position z and rotation X, Y
         rigidBody.constraints = RigidbodyConstraints.FreezePositionZ|RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
     }
 
     //thurst upwards
     void Thrust(){
         rigidBody.AddRelativeForce(Vector3.up * thrustSpeed * Time.deltaTime);
+    }
+
+    void PlayAudio(){
+        if(!audioSource.isPlaying){
+            audioSource.Play();
+        }
+    }
+    
+    void StopAudio(){
+        if(audioSource.isPlaying){
+            audioSource.Stop();
+        }
     }
 }
