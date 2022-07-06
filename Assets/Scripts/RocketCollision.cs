@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 public class RocketCollision : MonoBehaviour
 {
     [SerializeField] float delayInSeconds = 1f;
+    [SerializeField] AudioClip deathExplosion;
+    [SerializeField] AudioClip success;
+
+    AudioSource audioSource;
     RocketMovement rocketMovementScript;
     Rigidbody rigidBody;
 
@@ -13,6 +17,7 @@ public class RocketCollision : MonoBehaviour
     {
         rocketMovementScript = GetComponent<RocketMovement>();
         rigidBody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter(Collision other) {
@@ -32,15 +37,23 @@ public class RocketCollision : MonoBehaviour
     }
 
     void OnCrashPlanet(float secondsInterval){
+        //restrain movements
         rocketMovementScript.enabled = false;
          // add sound effect
+         audioSource.PlayOneShot(deathExplosion, 0.4f);
         //add particle effect
+        //reload planet
         Invoke("ReloadActivePlanet",secondsInterval);
        
     }
     void GoToNextPlanet(float secondsInterval){
+        //restrain movements
         rocketMovementScript.enabled = false;
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
+        //play success
+         audioSource.PlayOneShot(success, 0.8f);
+        //add particle effect
+        //next planet
         Invoke("NextPlanet", secondsInterval);
         
     }

@@ -9,6 +9,7 @@ public class RocketMovement : MonoBehaviour
 
     [SerializeField] private float thrustSpeed = 900f;
     [SerializeField] private float rotSpeed = 40f;
+    [SerializeField] private AudioClip thrustAudioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +62,7 @@ public class RocketMovement : MonoBehaviour
 
     void PlayAudio(){
         if(!audioSource.isPlaying){
-            audioSource.Play();
+            audioSource.PlayOneShot(thrustAudioClip);
         }
     }
     
