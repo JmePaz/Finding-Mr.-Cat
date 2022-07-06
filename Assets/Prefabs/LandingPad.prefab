@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4269039736614558206}
   - component: {fileID: 4990471854061243698}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: LandingPad
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
