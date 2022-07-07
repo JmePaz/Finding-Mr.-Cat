@@ -12,27 +12,39 @@ public class RocketCollision : MonoBehaviour
     RocketMovement rocketMovementScript;
     Rigidbody rigidBody;
 
+    bool isInCollision;
+
     // Start is called before the first frame update
     void Start()
     {
         rocketMovementScript = GetComponent<RocketMovement>();
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
+        isInCollision = false;
+    
     }
 
     void OnCollisionEnter(Collision other) {
+        if(isInCollision){
+            return;
+        }
+
         GameObject otherGObj = other.gameObject;
         if(otherGObj.tag == "Finish"){
             Debug.Log("Successes:Planet 1 is finished.");
             GoToNextPlanet(delayInSeconds);// go to next level/planet after 1 seconds
+            isInCollision = true;
         }
         else if(otherGObj.tag == "Obstacles"){
              Debug.Log("Hitted an Obstacle.");
             OnCrashPlanet(delayInSeconds); 
+            isInCollision = true;
         }
         else if(otherGObj.tag == "Ground"){
             Debug.Log("Reload Level");
            OnCrashPlanet(delayInSeconds);
+           isInCollision = true;
         }
     }
 
@@ -40,6 +52,7 @@ public class RocketCollision : MonoBehaviour
         //restrain movements
         rocketMovementScript.enabled = false;
          // add sound effect
+         audioSource.Stop();
          audioSource.PlayOneShot(deathExplosion, 0.4f);
         //add particle effect
         //reload planet
@@ -51,6 +64,7 @@ public class RocketCollision : MonoBehaviour
         rocketMovementScript.enabled = false;
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         //play success
+         audioSource.Stop();
          audioSource.PlayOneShot(success, 0.8f);
         //add particle effect
         //next planet
