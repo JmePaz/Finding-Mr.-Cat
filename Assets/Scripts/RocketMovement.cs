@@ -31,38 +31,38 @@ public class RocketMovement : MonoBehaviour
     {
         //side thrust
         if(Input.GetKey(KeyCode.LeftArrow)||Input.GetKey(KeyCode.A)){
-            //add particles
-            rightThrustParticles.Play();
-            //rotate
-            Rotate(Vector3.forward);
-            Debug.Log("Rotating Left");
+            rightThrustParticles.Play();  //add particles
+            Rotate(Vector3.forward); //rotate
         }
         else if(Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)){
-            //add particles
-            leftThrustParticles.Play();
-            //rotate
-            Rotate(Vector3.back);
-            Debug.Log("Rotating Right");
+            leftThrustParticles.Play();  //add particles
+            Rotate(Vector3.back); // rotate
         }
-        else{
-            //stop side thrust particles
-            if(rightThrustParticles.isPlaying){
-                rightThrustParticles.Stop();
-            }
-            else if(leftThrustParticles.isPlaying){
-                leftThrustParticles.Stop();
-            }
+        else
+        {
+            StopSideParticles();
         }
-        
+
         //upwards thurst
-        if(Input.GetKey(KeyCode.Space)){
+        if (Input.GetKey(KeyCode.Space)){
             Thrust();
-            PlayAudio();
-            Debug.Log("Thrusting");
         }
         else{
             mainThrustParticles.Stop();
             StopAudio();
+        }
+    }
+
+    private void StopSideParticles()
+    {
+        //stop side thrust particles
+        if (rightThrustParticles.isPlaying)
+        {
+            rightThrustParticles.Stop();
+        }
+        else if (leftThrustParticles.isPlaying)
+        {
+            leftThrustParticles.Stop();
         }
     }
 
@@ -81,6 +81,7 @@ public class RocketMovement : MonoBehaviour
         if(!mainThrustParticles.isPlaying){
              mainThrustParticles.Play();
         }
+        PlayAudio();
     }
 
     void PlayAudio(){
