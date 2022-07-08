@@ -8,6 +8,9 @@ public class RocketCollision : MonoBehaviour
     [SerializeField] AudioClip deathExplosion;
     [SerializeField] AudioClip success;
 
+    [SerializeField] ParticleSystem explosionParticles;
+    [SerializeField] ParticleSystem successParticles;
+
     AudioSource audioSource;
     RocketMovement rocketMovementScript;
     Rigidbody rigidBody;
@@ -50,23 +53,27 @@ public class RocketCollision : MonoBehaviour
 
     void OnCrashPlanet(float secondsInterval){
         //restrain movements
+        rocketMovementScript.StopAllParticles();
         rocketMovementScript.enabled = false;
          // add sound effect
          audioSource.Stop();
          audioSource.PlayOneShot(deathExplosion, 0.4f);
         //add particle effect
+        explosionParticles.Play();
         //reload planet
         Invoke("ReloadActivePlanet",secondsInterval);
        
     }
     void GoToNextPlanet(float secondsInterval){
         //restrain movements
+        rocketMovementScript.StopAllParticles();
         rocketMovementScript.enabled = false;
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         //play success
          audioSource.Stop();
          audioSource.PlayOneShot(success, 0.8f);
         //add particle effect
+        successParticles.Play();
         //next planet
         Invoke("NextPlanet", secondsInterval);
         
