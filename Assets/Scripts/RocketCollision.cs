@@ -15,7 +15,7 @@ public class RocketCollision : MonoBehaviour
     RocketMovement rocketMovementScript;
     Rigidbody rigidBody;
 
-    bool isInCollision;
+    bool isInCollision, isCollisionEnabled;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +25,30 @@ public class RocketCollision : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         isInCollision = false;
+        isCollisionEnabled = true;
     
+    }
+    void Update()
+    {
+        CheatKeys();
+    }
+
+    private void CheatKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            GoToNextPlanet(0.6f);
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            isCollisionEnabled = !isCollisionEnabled;
+            Debug.Log("isCollisionEnabled");
+        }
+  
     }
 
     void OnCollisionEnter(Collision other) {
-        if(isInCollision){
+        if(isInCollision || !isCollisionEnabled){
             return;
         }
 
@@ -51,7 +70,7 @@ public class RocketCollision : MonoBehaviour
         }
     }
 
-    void OnCrashPlanet(float secondsInterval){
+    void OnCrashPlanet(float secondsInterval=1f){
         //restrain movements
         rocketMovementScript.StopAllParticles();
         rocketMovementScript.enabled = false;
@@ -64,7 +83,7 @@ public class RocketCollision : MonoBehaviour
         Invoke("ReloadActivePlanet",secondsInterval);
        
     }
-    void GoToNextPlanet(float secondsInterval){
+    void GoToNextPlanet(float secondsInterval=1f){
         //restrain movements
         rocketMovementScript.StopAllParticles();
         rocketMovementScript.enabled = false;
