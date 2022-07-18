@@ -32,6 +32,16 @@ public class RocketMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //upwards thurst
+        if (Input.GetKey(KeyCode.Space)){
+            isThrusting = true;
+            Thrust();
+        }
+        else{
+            isThrusting = false;
+            mainThrustParticles.Stop();
+            StopAudio();
+        }
         //side thrust
         if(Input.GetKey(KeyCode.LeftArrow)||Input.GetKey(KeyCode.A)){
             rightThrustParticles.Play();  //add particles
@@ -48,16 +58,7 @@ public class RocketMovement : MonoBehaviour
             StopSideParticles();
         }
 
-        //upwards thurst
-        if (Input.GetKey(KeyCode.Space)){
-            isThrusting = true;
-            Thrust();
-        }
-        else{
-            isThrusting = false;
-            mainThrustParticles.Stop();
-            StopAudio();
-        }
+ 
     }
     void FixedUpdate(){
         //velocity!=0
@@ -120,5 +121,8 @@ public class RocketMovement : MonoBehaviour
         mainThrustParticles.Stop();
         leftThrustParticles.Stop();
         rightThrustParticles.Stop();
+    }
+    private void OnCollisionEnter(Collision other) {
+        Debug.Log(other.gameObject.name);
     }
 }
