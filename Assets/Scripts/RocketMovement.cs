@@ -13,7 +13,7 @@ public class RocketMovement : MonoBehaviour
     [SerializeField] ParticleSystem leftThrustParticles;
     [SerializeField] ParticleSystem rightThrustParticles;
 
-    bool isThrusting;
+    public bool isThrusting;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class RocketMovement : MonoBehaviour
         //set audioSource to loop
         audioSource.loop = true;
         //stop rotation
-         rigidBody.freezeRotation = true; // freeze all rotation
+        // rigidBody.freezeRotation = true; // freeze all rotation
         isThrusting = false;
     }
 
@@ -63,13 +63,15 @@ public class RocketMovement : MonoBehaviour
     void FixedUpdate(){
         //velocity!=0
        if(isThrusting && rigidBody.velocity.y<Mathf.Epsilon){
-            rigidBody.velocity = Vector3.up * speed * Time.deltaTime;
+           // rigidBody.velocity = Vector3.up * speed * Time.deltaTime;
+           rigidBody.AddForce(Vector3.up * speed * Time.deltaTime, ForceMode.VelocityChange);
        }
        else if(!isThrusting&&rigidBody.velocity.y>=Mathf.Epsilon){
-            rigidBody.velocity = Vector3.down * speed*2f *Time.deltaTime;
+             rigidBody.AddForce(Vector3.down * speed * 10f * Time.deltaTime, ForceMode.VelocityChange);
         }
     }
-
+    
+    
     private void StopSideParticles()
     {
         //stop side thrust particles
@@ -97,6 +99,7 @@ public class RocketMovement : MonoBehaviour
 
     //thurst upwards
     void Thrust(){
+ 
         rigidBody.AddRelativeForce(Vector3.up * thrustSpeed * Time.deltaTime);
         //particles
         if(!mainThrustParticles.isPlaying){
@@ -124,5 +127,13 @@ public class RocketMovement : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) {
         Debug.Log(other.gameObject.name);
+    }
+
+    public void SpeedDown(){
+        rigidBody.velocity = (Vector3.down*3.0f*rigidBody.velocity.y);
+    }
+
+    public void UnFreezeRotation(){
+        rigidBody.constraints = RigidbodyConstraints.None;
     }
 }
