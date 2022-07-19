@@ -15,7 +15,7 @@ public class RocketCollision : MonoBehaviour
     RocketMovement rocketMovementScript;
     Rigidbody rigidBody;
 
-    bool isInCollision, isCollisionEnabled;
+    public bool isInCollision, isCollisionEnabled;
 
     // Start is called before the first frame update
     void Start()
@@ -137,8 +137,8 @@ public class RocketCollision : MonoBehaviour
 
     void BounceOff(Vector3 contactPoint){
         Vector3 direction  = (contactPoint - this.transform.position).normalized;
-        if(direction.y>=0){
-            direction.y = -1;
+        if(direction.y<=0){
+            direction.y = 1;
         }
         rigidBody.AddForce(-direction*100, ForceMode.VelocityChange);
     }

@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SetUpEnvironment : MonoBehaviour
 {
     RocketMovement rocketMovementScript;
     [SerializeField] ObstacleMovement LauncingPadInitator;
     [SerializeField] InitateObstacles obstacleGenerator;
+
+    [SerializeField] TextMeshProUGUI noteText;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +26,7 @@ public class SetUpEnvironment : MonoBehaviour
             this.enabled = false;
             LauncingPadInitator.enabled = true;
             obstacleGenerator.Activate();
+            noteText.enabled = false;
             Destroy(this);
         }
     }
