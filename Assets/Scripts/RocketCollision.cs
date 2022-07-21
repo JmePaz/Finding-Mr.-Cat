@@ -15,7 +15,7 @@ public class RocketCollision : MonoBehaviour
     RocketMovement rocketMovementScript;
     Rigidbody rigidBody;
 
-    bool isInCollision, isCollisionEnabled;
+    public bool isInCollision, isCollisionEnabled;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class RocketCollision : MonoBehaviour
     }
     void Update()
     {
-        CheatKeys();
+
     }
 
     private void CheatKeys()
@@ -59,8 +59,13 @@ public class RocketCollision : MonoBehaviour
             isInCollision = true;
         }
         else if(otherGObj.tag == "Obstacles"){
+            //stop obs movements
+            BounceOff(other.contacts[0].point.normalized);
+            StopObstaclesMovement();
+            //play particles and sound sfx
              Debug.Log("Hitted an Obstacle.");
             OnCrashPlanet(delayInSeconds); 
+            //already collided
             isInCollision = true;
         }
         else if(otherGObj.tag == "Ground"){
@@ -68,12 +73,20 @@ public class RocketCollision : MonoBehaviour
            OnCrashPlanet(delayInSeconds);
            isInCollision = true;
         }
+        else if(otherGObj.name == "End"){
+            Debug.Log("Reload Level");
+            OnCrashPlanet(delayInSeconds);
+            isInCollision = true;
+        }
     }
 
     void OnCrashPlanet(float secondsInterval=1f){
-        //restrain movements
+        //modify rocket movements
         rocketMovementScript.StopAllParticles();
+        rocketMovementScript.SpeedDown();
+        rocketMovementScript.UnFreezeRotation();
         rocketMovementScript.enabled = false;
+        
          // add sound effect
          audioSource.Stop();
          audioSource.PlayOneShot(deathExplosion, 0.4f);
@@ -112,5 +125,21 @@ public class RocketCollision : MonoBehaviour
     }
     void LoadGameScene(int sceneIndex){
         SceneManager.LoadScene(sceneIndex);
+    }
+
+    void StopObstaclesMovement(){
+        GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacles");
+        foreach(GameObject obstacle in obstacles){
+            ObstacleMovement obsMovScript = obstacle.GetComponent<ObstacleMovement>();
+            obsMovScript.Stop();
+        }
+    }
+
+    void BounceOff(Vector3 contactPoint){
+        Vector3 direction  = (contactPoint - this.transform.position).normalized;
+        if(direction.y<=0){
+            direction.y = 1;
+        }
+        rigidBody.AddForce(-direction*100, ForceMode.VelocityChange);
     }
 }
