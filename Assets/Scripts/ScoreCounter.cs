@@ -32,7 +32,10 @@ public class ScoreCounter : MonoBehaviour
 
         float veloc = rigidBody.velocity.y;
         //degrade
-        if(veloc<Mathf.Epsilon){
+        if(Mathf.Abs(veloc)<1f){
+            veloc = 0f;
+        }
+        else if(veloc<Mathf.Epsilon){
             veloc /= 10f;
         }
 

@@ -45,13 +45,13 @@ public class RocketMovement : MonoBehaviour
         //side thrust
         if(Input.GetKey(KeyCode.LeftArrow)||Input.GetKey(KeyCode.A)){
             rightThrustParticles.Play();  //add particles
-           // Rotate(Vector3.forward); //rotate
-            Move(Vector3.left);
+             Rotate(Vector3.forward); //rotate
+           
         }
         else if(Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D)){
             leftThrustParticles.Play();  //add particles
-            //Rotate(Vector3.back); // rotate
-            Move(Vector3.right);
+            Rotate(Vector3.back); // rotate
+    
         }
         else
         {
