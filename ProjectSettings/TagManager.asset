@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstacles
   - Ground
+  - Cat
+  - Devil Cat
   layers:
   - Default
   - TransparentFX
@@ -15,10 +17,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Obstacle
+  - World
+  - Cat
+  - Rocket
   - 
   - 
   - 

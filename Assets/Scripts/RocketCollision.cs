@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
+
 public class RocketCollision : MonoBehaviour
 {
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
     [SerializeField] float delayInSeconds = 1f;
     [SerializeField] AudioClip deathExplosion;
     [SerializeField] AudioClip success;
@@ -53,15 +56,15 @@ public class RocketCollision : MonoBehaviour
         }
 
         GameObject otherGObj = other.gameObject;
-        if(otherGObj.tag == "Finish"){
+        if(otherGObj.tag == "Cat"){
             Debug.Log("Successes:Planet 1 is finished.");
+            Destroy(otherGObj);
             GoToNextPlanet(delayInSeconds);// go to next level/planet after 1 seconds
             isInCollision = true;
         }
         else if(otherGObj.tag == "Obstacles"){
             //stop obs movements
             BounceOff(other.contacts[0].point.normalized);
-            StopObstaclesMovement();
             //play particles and sound sfx
              Debug.Log("Hitted an Obstacle.");
             OnCrashPlanet(delayInSeconds); 
@@ -82,9 +85,11 @@ public class RocketCollision : MonoBehaviour
 
     void OnCrashPlanet(float secondsInterval=1f){
         //modify rocket movements
+        SetCameraViewToNothing();
+    
         rocketMovementScript.StopAllParticles();
         rocketMovementScript.SpeedDown();
-        rocketMovementScript.UnFreezeRotation();
+        //rocketMovementScript.UnFreezeRotation();
         rocketMovementScript.enabled = false;
         
          // add sound effect
@@ -95,6 +100,11 @@ public class RocketCollision : MonoBehaviour
         //reload planet
         Invoke("ReloadActivePlanet",secondsInterval);
        
+    }
+
+    void SetCameraViewToNothing(){
+        virtualCamera.Follow = null;
+        virtualCamera.LookAt = null;
     }
     void GoToNextPlanet(float secondsInterval=1f){
         //restrain movements
