@@ -22,3 +22,6 @@ Developed Using Unity 3d C#
       1. Rocket Thrust From: https://freesound.org/people/Maxx222/sounds/446764/
       2. Death Explosion From: Udemy Course
       3. Success From: Udemy Course
+      
+#References:
+  Predicted Projectile Tutorial by Romi Fauzi from https://youtu.be/03GHtGyEHas
